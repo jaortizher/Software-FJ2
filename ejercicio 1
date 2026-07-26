@@ -1,0 +1,29 @@
+"""
+exceptions.py
+Excepciones personalizadas del sistema.
+"""
+
+
+class ErrorSistema(Exception):
+    """Excepción base del sistema."""
+    pass
+
+
+class ErrorCliente(ErrorSistema):
+    """Errores relacionados con clientes."""
+    pass
+
+
+class ErrorServicio(ErrorSistema):
+    """Errores relacionados con servicios."""
+    pass
+
+
+class ErrorReserva(ErrorSistema):
+    """Errores relacionados con reservas."""
+    pass
+
+
+class ErrorValidacion(ErrorSistema):
+    """Errores de validación."""
+    pass
