@@ -1,0 +1,83 @@
+from abc import ABC, abstractmethod
+
+from exceptions import (
+    ClienteError,
+    ServicioError,
+    ReservaError,
+    ValidacionError,
+)
+
+from logger import registrar_evento, registrar_error
+class Entidad(ABC):
+    """
+    Clase abstracta base para las entidades del sistema.
+    """
+
+    def __init__(self, codigo):
+        self._codigo = codigo
+
+    @property
+    def codigo(self):
+        return self._codigo
+
+    @abstractmethod
+    def mostrar_informacion(self):
+        pass
+        class Cliente(Entidad):
+
+    def __init__(self, codigo, nombre, documento, telefono):
+        super().__init__(codigo)
+
+        self.nombre = nombre
+        self.documento = documento
+        self.telefono = telefono
+
+    @property
+    def nombre(self):
+        return self.__nombre
+
+    @nombre.setter
+    def nombre(self, valor):
+
+        if len(valor.strip()) < 3:
+            raise ValidacionError(
+                "El nombre debe contener mínimo tres caracteres."
+            )
+
+        self.__nombre = valor.title()
+
+    @property
+    def documento(self):
+        return self.__documento
+
+    @documento.setter
+    def documento(self, valor):
+
+        if not str(valor).isdigit():
+            raise ClienteError(
+                "Documento inválido."
+            )
+
+        self.__documento = str(valor)
+
+    @property
+    def telefono(self):
+        return self.__telefono
+
+    @telefono.setter
+    def telefono(self, valor):
+
+        if not str(valor).isdigit():
+            raise ClienteError(
+                "Teléfono inválido."
+            )
+
+        self.__telefono = str(valor)
+
+    def mostrar_informacion(self):
+
+        return (
+            f"Cliente: {self.nombre}\n"
+            f"Documento: {self.documento}\n"
+            f"Teléfono: {self.telefono}"
+        )
