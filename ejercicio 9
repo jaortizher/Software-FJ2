@@ -1,0 +1,112 @@
+ def listar_clientes(self):
+
+        datos = []
+
+        for cliente in self.clientes:
+
+            datos.append(
+                cliente.mostrar_informacion()
+            )
+
+        return datos
+        def listar_servicios(self):
+
+        datos = []
+
+        for servicio in self.servicios:
+
+            datos.append(
+                servicio.descripcion()
+            )
+
+        return datos
+        def listar_reservas(self):
+
+        datos = []
+
+        for reserva in self.reservas:
+
+            datos.append(
+                reserva.mostrar_reserva()
+            )
+
+        return datos
+        def eliminar_cliente(
+        self,
+        documento
+    ):
+
+        cliente = self.buscar_cliente(documento)
+
+        self.clientes.remove(cliente)
+
+        registrar_evento(
+            f"Cliente eliminado: {cliente.nombre}"
+        )
+          def estadisticas(self):
+
+        return {
+
+            "clientes": len(self.clientes),
+
+            "servicios": len(self.servicios),
+
+            "reservas": len(self.reservas)
+
+        }
+        def ejecutar_pruebas(self):
+
+        print("===== SIMULACIÓN DEL SISTEMA =====")
+
+        try:
+
+            c1 = self.registrar_cliente(
+                1,
+                "Juan Perez",
+                "123456",
+                "3001112233"
+            )
+
+            c2 = self.registrar_cliente(
+                2,
+                "Maria Lopez",
+                "654321",
+                "3002223344"
+            )
+
+            s1 = self.crear_reserva_sala(
+                20,
+                120000
+            )
+
+            s2 = self.crear_alquiler_equipo(
+                "Video Beam",
+                80000
+            )
+
+            s3 = self.crear_asesoria(
+                "Programación Python",
+                150000
+            )
+
+            r1 = self.crear_reserva(
+                c1,
+                s1,
+                2
+            )
+
+            r1.confirmar()
+
+            print(r1.mostrar_reserva())
+
+            print(
+                "Total:",
+                r1.procesar()
+            )
+
+            # Operación inválida (ejemplo)
+            self.buscar_cliente("999999")
+
+        except Exception as error:
+
+            print("Error controlado:", error)
