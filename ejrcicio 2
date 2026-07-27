@@ -1,0 +1,31 @@
+"""
+logger.py
+Registra los eventos y errores del sistema.
+"""
+
+from datetime import datetime
+
+
+ARCHIVO_LOG = "logs.txt"
+
+
+def registrar_evento(mensaje):
+    """
+    Guarda un evento en el archivo de log.
+    """
+
+    with open(ARCHIVO_LOG, "a", encoding="utf-8") as archivo:
+        archivo.write(
+            f"[{datetime.now()}] EVENTO: {mensaje}\n"
+        )
+
+
+def registrar_error(error):
+    """
+    Guarda un error en el archivo de log.
+    """
+
+    with open(ARCHIVO_LOG, "a", encoding="utf-8") as archivo:
+        archivo.write(
+            f"[{datetime.now()}] ERROR: {error}\n"
+        )
