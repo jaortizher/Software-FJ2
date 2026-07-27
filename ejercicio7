@@ -1,0 +1,84 @@
+  def calcular_total(
+        self,
+        impuesto=0,
+        descuento=0
+    ):
+
+        total = self.servicio.calcular_costo()
+
+        total *= self.duracion
+
+        total += total * impuesto
+
+        total -= total * descuento
+
+        return round(total, 2)
+         def procesar(self):
+
+        try:
+
+            if self.estado != "Confirmada":
+
+                raise ReservaError(
+                    "Debe confirmar la reserva antes de procesarla."
+                )
+
+            total = self.calcular_total()
+
+        except ReservaError as error:
+
+            registrar_error(error)
+
+            raise
+
+        else:
+
+            registrar_evento(
+                "Reserva procesada correctamente."
+            )
+
+            return total
+
+        finally:
+
+            registrar_evento(
+                "Proceso de reserva finalizado."
+            )
+            def procesar_seguro(self):
+
+        try:
+
+            return self.procesar()
+
+        except Exception as error:
+
+            raise ReservaError(
+                "No fue posible completar el proceso."
+            ) from error
+            def mostrar_reserva(self):
+
+        return f"""
+CLIENTE
+
+{self.cliente.nombre}
+
+SERVICIO
+
+{self.servicio.nombre}
+
+DESCRIPCIÓN
+
+{self.servicio.descripcion()}
+
+DURACIÓN
+
+{self.duracion}
+
+ESTADO
+
+{self.estado}
+
+TOTAL
+
+${self.calcular_total()}
+"""
