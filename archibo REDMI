@@ -1,0 +1,26 @@
+# Software FJ
+
+## Descripción
+
+Sistema desarrollado en Python para la gestión de clientes, servicios y reservas utilizando Programación Orientada a Objetos.
+
+## Características
+
+- Clases abstractas
+- Herencia
+- Polimorfismo
+- Encapsulamiento
+- Excepciones personalizadas
+- Registro de eventos
+- Registro de errores
+- Interfaz gráfica con Tkinter
+- Manejo de listas
+- Sin base de datos
+
+## Requisitos
+
+Python 3.12 o superior
+
+## Ejecución
+
+python main.py
