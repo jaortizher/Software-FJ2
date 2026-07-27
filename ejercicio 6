@@ -1,0 +1,63 @@
+class Reserva:
+
+    def __init__(self, cliente, servicio, duracion):
+
+        if not isinstance(cliente, Cliente):
+            raise ClienteError(
+                "El objeto cliente no es válido."
+            )
+
+        if not isinstance(servicio, Servicio):
+            raise ServicioError(
+                "El objeto servicio no es válido."
+            )
+
+        if duracion <= 0:
+            raise ReservaError(
+                "La duración debe ser mayor que cero."
+            )
+
+        self.cliente = cliente
+        self.servicio = servicio
+        self.duracion = duracion
+        self.estado = "Pendiente"
+         def confirmar(self):
+
+        try:
+
+            if self.estado == "Confirmada":
+                raise ReservaError(
+                    "La reserva ya fue confirmada."
+                )
+
+            self.estado = "Confirmada"
+
+            registrar_evento(
+                f"Reserva confirmada para {self.cliente.nombre}"
+            )
+
+        except Exception as error:
+
+            registrar_error(error)
+
+            raise
+            def cancelar(self):
+
+        try:
+
+            if self.estado == "Cancelada":
+                raise ReservaError(
+                    "La reserva ya está cancelada."
+                )
+
+            self.estado = "Cancelada"
+
+            registrar_evento(
+                f"Reserva cancelada de {self.cliente.nombre}"
+            )
+
+        except Exception as error:
+
+            registrar_error(error)
+
+            raise
