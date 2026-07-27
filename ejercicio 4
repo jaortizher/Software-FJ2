@@ -1,0 +1,81 @@
+class Servicio(ABC):
+
+    def __init__(self, nombre, precio):
+
+        self.nombre = nombre
+        self.precio = precio
+
+    @property
+    def nombre(self):
+        return self.__nombre
+
+    @nombre.setter
+    def nombre(self, valor):
+
+        if len(valor.strip()) == 0:
+            raise ServicioError(
+                "Nombre del servicio vacío."
+            )
+
+        self.__nombre = valor
+
+    @property
+    def precio(self):
+        return self.__precio
+
+    @precio.setter
+    def precio(self, valor):
+
+        if valor <= 0:
+            raise ServicioError(
+                "Precio inválido."
+            )
+
+        self.__precio = float(valor)
+
+    @abstractmethod
+    def calcular_costo(self):
+        pass
+
+    @abstractmethod
+    def descripcion(self):
+        pass
+class ReservaSala(Servicio):
+
+    def __init__(self, capacidad, precio):
+
+        super().__init__(
+            "Reserva de Sala",
+            precio
+        )
+
+        self.capacidad = capacidad
+
+    def calcular_costo(self):
+
+        return self.precio
+
+    def descripcion(self):
+
+        return (
+            f"Sala para "
+            f"{self.capacidad} personas."
+        )
+class AlquilerEquipo(Servicio):
+
+    def __init__(self, equipo, precio):
+
+        super().__init__(
+            "Alquiler de Equipo",
+            precio
+        )
+
+        self.equipo = equipo
+
+    def calcular_costo(self):
+
+        return self.precio
+
+    def descripcion(self):
+
+        return f"Equipo: {self.equipo}"
