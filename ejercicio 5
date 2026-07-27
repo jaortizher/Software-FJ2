@@ -1,0 +1,21 @@
+class Asesoria(Servicio):
+
+    def __init__(self, especialista, precio):
+
+        super().__init__(
+            "Asesoría",
+            precio
+        )
+
+        self.especialista = especialista
+
+    def calcular_costo(self):
+
+        return self.precio
+
+    def descripcion(self):
+
+        return (
+            f"Asesor especializado en "
+            f"{self.especialista}"
+        )
