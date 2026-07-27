@@ -1,0 +1,148 @@
+from models import (
+    Cliente,
+    ReservaSala,
+    AlquilerEquipo,
+    Asesoria,
+    Reserva,
+)
+
+from exceptions import (
+    ClienteError,
+    ServicioError,
+    ReservaError,
+    ValidacionError,
+)
+
+from logger import registrar_evento, registrar_error
+class SistemaSoftwareFJ:
+
+    def __init__(self):
+
+        self.clientes = []
+        self.servicios = []
+        self.reservas = []
+        def registrar_cliente(
+        self,
+        codigo,
+        nombre,
+        documento,
+        telefono
+    ):
+
+        try:
+
+            cliente = Cliente(
+                codigo,
+                nombre,
+                documento,
+                telefono
+            )
+
+            self.clientes.append(cliente)
+
+            registrar_evento(
+                f"Cliente registrado: {nombre}"
+            )
+
+            return cliente
+
+        except Exception as error:
+
+            registrar_error(error)
+
+            raise
+              def crear_reserva_sala(
+        self,
+        capacidad,
+        precio
+    ):
+
+        servicio = ReservaSala(
+            capacidad,
+            precio
+        )
+
+        self.servicios.append(servicio)
+
+        registrar_evento(
+            "Servicio Reserva Sala creado."
+        )
+
+        return servicio
+         def crear_alquiler_equipo(
+        self,
+        equipo,
+        precio
+    ):
+
+        servicio = AlquilerEquipo(
+            equipo,
+            precio
+        )
+
+        self.servicios.append(servicio)
+
+        registrar_evento(
+            "Servicio Alquiler Equipo creado."
+        )
+
+        return servicio
+        def crear_asesoria(
+        self,
+        especialista,
+        precio
+    ):
+
+        servicio = Asesoria(
+            especialista,
+            precio
+        )
+
+        self.servicios.append(servicio)
+
+        registrar_evento(
+            "Servicio Asesoría creada."
+        )
+
+        return servicio
+        def buscar_cliente(
+        self,
+        documento
+    ):
+
+        for cliente in self.clientes:
+
+            if cliente.documento == str(documento):
+                return cliente
+
+        raise ClienteError(
+            "Cliente no encontrado."
+        )
+        def crear_reserva(
+        self,
+        cliente,
+        servicio,
+        duracion
+    ):
+
+        try:
+
+            reserva = Reserva(
+                cliente,
+                servicio,
+                duracion
+            )
+
+            self.reservas.append(reserva)
+
+            registrar_evento(
+                "Reserva creada."
+            )
+
+            return reserva
+
+        except Exception as error:
+
+            registrar_error(error)
+
+            raise
